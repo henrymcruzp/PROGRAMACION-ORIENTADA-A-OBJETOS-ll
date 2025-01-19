@@ -8,7 +8,7 @@ class Vehiculo:
     def obtener_modelo(self):
         return self.__modelo
 
-    # Método común para todos los vehículos
+    # Metodo común para todos los vehículos
     def mostrar_info(self):
         return f"Vehículo de marca {self.marca}, modelo {self.obtener_modelo()}"
 
@@ -18,7 +18,7 @@ class Coche(Vehiculo):
         super().__init__(marca, modelo)  # Llamada al constructor de la clase base
         self.puertas = puertas
 
-    # Sobrescribimos el método mostrar_info para un comportamiento específico
+    # Sobrescribimos el metodo mostrar_info para un comportamiento específico
     def mostrar_info(self):
         return f"Coche de marca {self.marca}, modelo {self.obtener_modelo()}, con {self.puertas} puertas"
 
@@ -26,6 +26,6 @@ class Coche(Vehiculo):
 mi_coche = Coche("Toyota", "Corolla", 4)
 
 # Mostramos la información del coche (polimorfismo)
-print(mi_coche.mostrar_info())  # El método 'mostrar_info' se comporta de forma diferente
+print(mi_coche.mostrar_info())  # El metodo 'mostrar_info' se comporta de forma diferente
 
 
