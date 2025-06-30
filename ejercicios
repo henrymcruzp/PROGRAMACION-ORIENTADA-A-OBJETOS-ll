@@ -1,0 +1,130 @@
+// Ejercicio 1:
+// Escribir un programa que almacene las asignaturas de un curso en una lista y las muestre por pantalla.
+
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        // Lista de asignaturas
+        List<string> asignaturas = new List<string> { "Matemáticas", "Física", "Química", "Historia", "Lengua" };
+        
+        Console.WriteLine("Asignaturas del curso:");
+        
+        // Recorremos la lista y mostramos cada asignatura
+        foreach (string asignatura in asignaturas)
+        {
+            Console.WriteLine(asignatura);
+        }
+    }
+}
+// Ejercicio 2:
+// Mostrar el mensaje "Yo estudio <asignatura>" para cada asignatura.
+
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        List<string> asignaturas = new List<string> { "Matemáticas", "Física", "Química", "Historia", "Lengua" };
+        
+        // Mostrar mensaje personalizado por cada asignatura
+        foreach (string asignatura in asignaturas)
+        {
+            Console.WriteLine($"Yo estudio {asignatura}");
+        }
+    }
+}
+// Ejercicio 3:
+// Pedir al usuario la nota por cada asignatura y mostrar el mensaje: En <asignatura> has sacado <nota>
+
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        List<string> asignaturas = new List<string> { "Matemáticas", "Física", "Química", "Historia", "Lengua" };
+        Dictionary<string, double> notas = new Dictionary<string, double>();
+
+        // Pedimos al usuario las notas
+        foreach (string asignatura in asignaturas)
+        {
+            Console.Write($"¿Qué nota has sacado en {asignatura}? ");
+            double nota = Convert.ToDouble(Console.ReadLine());
+            notas[asignatura] = nota;
+        }
+
+        Console.WriteLine("\nResultados:");
+
+        // Mostramos las notas con su asignatura
+        foreach (var item in notas)
+        {
+            Console.WriteLine($"En {item.Key} has sacado {item.Value}");
+        }
+    }
+}
+// Ejercicio 4:
+// Leer 6 números ganadores de la lotería, almacenarlos en una lista y mostrarlos ordenados.
+
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        List<int> numerosLoteria = new List<int>();
+
+        Console.WriteLine("Introduce los números ganadores de la lotería primitiva (6 números):");
+
+        // Pedimos 6 números y los guardamos en la lista
+        for (int i = 0; i < 6; i++)
+        {
+            Console.Write($"Número {i + 1}: ");
+            int num = Convert.ToInt32(Console.ReadLine());
+            numerosLoteria.Add(num);
+        }
+
+        // Ordenamos los números de menor a mayor
+        numerosLoteria.Sort();
+
+        Console.WriteLine("\nNúmeros ganadores ordenados:");
+        
+        // Mostramos los números ordenados
+        foreach (int num in numerosLoteria)
+        {
+            Console.Write($"{num} ");
+        }
+    }
+}
+// Ejercicio 5:
+// Crear una lista del 1 al 10 y mostrarla en orden inverso, separados por comas.
+
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        List<int> numeros = new List<int>();
+
+        // Llenamos la lista del 1 al 10
+        for (int i = 1; i <= 10; i++)
+        {
+            numeros.Add(i);
+        }
+
+        // Invertimos el orden
+        numeros.Reverse();
+
+        // Mostramos los números separados por coma
+        Console.WriteLine(string.Join(", ", numeros));
+    }
+}
