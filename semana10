@@ -1,0 +1,103 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace VacunacionCOVID
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("SISTEMA DE GESTIÓN DE VACUNACIÓN COVID-19");
+            Console.WriteLine("==========================================\n");
+            
+            // Crear conjunto de 500 ciudadanos
+            HashSet<string> todosCiudadanos = new HashSet<string>();
+            for (int i = 1; i <= 500; i++)
+            {
+                todosCiudadanos.Add($"Ciudadano {i}");
+            }
+            
+            // Crear conjunto de 75 ciudadanos vacunados con Pfizer
+            HashSet<string> vacunadosPfizer = new HashSet<string>();
+            Random random = new Random();
+            
+            while (vacunadosPfizer.Count < 75)
+            {
+                int indice = random.Next(1, 501);
+                string ciudadano = $"Ciudadano {indice}";
+                vacunadosPfizer.Add(ciudadano);
+            }
+            
+            // Crear conjunto de 75 ciudadanos vacunados con AstraZeneca
+            HashSet<string> vacunadosAstraZeneca = new HashSet<string>();
+            
+            while (vacunadosAstraZeneca.Count < 75)
+            {
+                int indice = random.Next(1, 501);
+                string ciudadano = $"Ciudadano {indice}";
+                
+                // Asegurar que no esté vacunado con Pfizer para evitar duplicados iniciales
+                if (!vacunadosPfizer.Contains(ciudadano))
+                {
+                    vacunadosAstraZeneca.Add(ciudadano);
+                }
+            }
+            
+            // Operaciones de conjuntos para obtener los listados solicitados
+            
+            // 1. Ciudadanos que no se han vacunado
+            HashSet<string> noVacunados = new HashSet<string>(todosCiudadanos);
+            noVacunados.ExceptWith(vacunadosPfizer);
+            noVacunados.ExceptWith(vacunadosAstraZeneca);
+            
+            // 2. Ciudadanos que han recibido ambas dosis
+            HashSet<string> ambasDosis = new HashSet<string>(vacunadosPfizer);
+            ambasDosis.IntersectWith(vacunadosAstraZeneca);
+            
+            // 3. Ciudadanos que solo han recibido la vacuna de Pfizer
+            HashSet<string> soloPfizer = new HashSet<string>(vacunadosPfizer);
+            soloPfizer.ExceptWith(vacunadosAstraZeneca);
+            
+            // 4. Ciudadanos que solo han recibido la vacuna de AstraZeneca
+            HashSet<string> soloAstraZeneca = new HashSet<string>(vacunadosAstraZeneca);
+            soloAstraZeneca.ExceptWith(vacunadosPfizer);
+            
+            // Mostrar resultados
+            Console.WriteLine($"Total de ciudadanos: {todosCiudadanos.Count}");
+            Console.WriteLine($"Vacunados con Pfizer: {vacunadosPfizer.Count}");
+            Console.WriteLine($"Vacunados con AstraZeneca: {vacunadosAstraZeneca.Count}");
+            Console.WriteLine($"\nRESULTADOS:");
+            Console.WriteLine($"No vacunados: {noVacunados.Count}");
+            Console.WriteLine($"Ambas dosis: {ambasDosis.Count}");
+            Console.WriteLine($"Solo Pfizer: {soloPfizer.Count}");
+            Console.WriteLine($"Solo AstraZeneca: {soloAstraZeneca.Count}");
+            
+            // Mostrar algunos ejemplos de cada grupo
+            Console.WriteLine("\n--- Ejemplos de cada grupo ---");
+            MostrarEjemplos("No vacunados", noVacunados);
+            MostrarEjemplos("Ambas dosis", ambasDosis);
+            MostbarEjemplos("Solo Pfizer", soloPfizer);
+            MostrarEjemplos("Solo AstraZeneca", soloAstraZeneca);
+            
+            Console.WriteLine("\nPresione cualquier tecla para salir...");
+            Console.ReadKey();
+        }
+        
+        static void MostrarEjemplos(string titulo, HashSet<string> conjunto)
+        {
+            Console.WriteLine($"\n{titulo} (primeros 5):");
+            int contador = 0;
+            foreach (var ciudadano in conjunto.Take(5))
+            {
+                Console.WriteLine($"  - {ciudadano}");
+                contador++;
+            }
+            
+            if (contador == 0)
+            {
+                Console.WriteLine("  (No hay elementos en este conjunto)");
+            }
+        }
+    }
+}
